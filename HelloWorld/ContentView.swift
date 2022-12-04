@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Text("This is Monica's first app!")
+        ScrollView {
+            VStack(alignment: .center) {
+                ForEach(1...100, id: \.self) {
+                    Text(fizzbuzz($0))
+                }
+            }
         }
-        .padding()
     }
 }
 
@@ -24,4 +23,17 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+let fizzbuzz:(Int) -> String = { i in
+        switch(i % 3 == 0, i % 5 == 0){
+            case (true, false):
+                return "Fizz"
+            case (false, true):
+                return "Buzz"
+            case (true, true):
+                return "FizzBuzz"
+            default:
+                return "\(i)"
+        }
 }
